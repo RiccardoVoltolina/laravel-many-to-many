@@ -11,7 +11,7 @@ class Project extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'description', 'authors', 'projectlink', 'thumb', 'githublink', 'type_id'];
+    protected $fillable = ['title', 'description', 'authors', 'projectlink', 'thumb', 'githublink', 'type_id', 'name_tech'];
 
     public function type(): BelongsTo
     {
@@ -19,7 +19,8 @@ class Project extends Model
     }
 
     public function technologies(): BelongsToMany {
-        return $this->belongsToMany(Technology::class);
-    }
 
+        return $this->belongsToMany(Technology::class);
+
+    }
 }

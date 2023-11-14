@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Project;
+use App\Models\Technology;
 use App\Models\Type;
 use Illuminate\Support\Facades\Storage;
 
@@ -32,8 +33,10 @@ class ProjectController extends Controller
         // passo tutti i dati del model Type alla variabile types
 
         $types = Type::all();
+
+        $technologies = Technology::all();
         
-        return view('admin.projects.create', compact('types'));
+        return view('admin.projects.create', compact('types', 'technologies'));
     }
 
     /**
@@ -41,7 +44,6 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-
 
         $validated = $request->validate([
             'title' => 'required|max:50|min:2',
@@ -66,8 +68,11 @@ class ProjectController extends Controller
         $project->description = $request->description;
         $project->title = $request->title;
         $project->authors = $request->authors;
+        
+        
+        $project->technologies()->attach($request->technologies);
 
-        // aggiungo anche il campo del type_id, per inviarlo al dataase
+        // aggiungo anche il campo del type_id, per inviarlo al database
 
         $project->type_id = $request->type_id;
 
@@ -82,7 +87,10 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        return view('admin.projects.show', compact('project'));
+
+        $technologies = Technology::all();
+
+        return view('admin.projects.show', compact('project', 'technologies'));
     }
 
     /**
@@ -94,7 +102,10 @@ class ProjectController extends Controller
 
         $types = Type::all();
 
-        return view('admin.projects.edit', compact('project', 'types'));
+        $technologies = Technology::all();
+
+
+        return view('admin.projects.edit', compact('project', 'types', 'technologies'));
     }
 
     /**
