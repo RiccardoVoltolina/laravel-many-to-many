@@ -70,7 +70,6 @@ class ProjectController extends Controller
         $project->authors = $request->authors;
         
         
-        $project->technologies()->attach($request->technologies);
 
         // aggiungo anche il campo del type_id, per inviarlo al database
 
@@ -78,6 +77,13 @@ class ProjectController extends Controller
 
 
         $project->save();
+
+        // IMPORTANTE: prima di usare atach, bisogna eseguire il save del progetto, senò non funziona!
+
+        // prendo i dati della richiesta e lo passo nel model Technology e tramite attach, creo il collegamento nella tabella condivisa tra project e tecnology
+        
+        $project->technologies()->attach($request->technologies);
+
         return to_route('project.index');
 
     }
@@ -141,8 +147,19 @@ class ProjectController extends Controller
             $data["thumb"] = $file_path;
         }
 
+        // eseguo un detach per rimuovere tutti i vecchi collegamenti con le tecnologie
+
+        $project->technologies()->detach();
+
+
         // aggiorno i dati del mio progetto
         $project->update($data);
+
+
+        // prendo i dati della richiesta e lo passo nel model Technology e tramite attach, creo il collegamento nella tabella condivisa tra project e tecnology
+
+        $project->technologies()->attach($request->technologies);
+
         return redirect()->route('project.show', $project->id);
     }
 
@@ -151,6 +168,9 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
+        $project->technologies()->detach();
+
         $project->delete();
+        
         return redirect()->route('project.index')->with('messaggio', 'hai cancellato il progetto con successo!');    }
 }
