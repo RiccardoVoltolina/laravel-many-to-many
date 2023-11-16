@@ -43,17 +43,17 @@
                         <td>{{ $project->description }}</td>
                         <td>{{ $project->authors }}</td>
                         <td>
-                            <div class="d-flex">
+                            <div class="d-flex justify-content-center">
 
                                 <form action="{{ route('project.show', [$project->id]) }}">
 
-                                    <button type="submit" class="btn btn-primary">Dettagli</button>
+                                    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-circle-info"></i></button>
 
                                 </form>
 
                                 <form class="mx-2" action="{{ route('project.edit', [$project->id]) }}">
 
-                                    <button type="submit" class="btn btn-warning">Aggiorna</button>
+                                    <button type="submit" class="btn btn-info"><i class="fa-solid fa-pencil"></i></button>
 
                                 </form>
 
@@ -62,8 +62,14 @@
                                     @method('DELETE')
 
                                     <button type="submit" class="btn btn-danger">
-                                        Cancella
+                                        <i class="fa-solid fa-trash"></i>
                                     </button>
+                                </form>
+
+                                <form class="mx-2" action="{{ route('project.recycle', [$project->id]) }}">
+
+                                    <button type="submit" class="btn btn-warning"><i class="fa-solid fa-recycle"></i></i></button>
+
                                 </form>
 
                             </div>
