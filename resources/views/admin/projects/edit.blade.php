@@ -5,7 +5,7 @@
 
 <div class="col-6 mx-auto">
     @if ($errors->any())
-    <div class="alert alert-danger">
+    <div class="alert alert-danger mt-3">
         <ul>
             @foreach ($errors->all() as $error)
             <li>{{$error}}</li>
@@ -69,7 +69,7 @@
         
 
         <div class="mb-3">
-            <label for="technologies" class="form-label">Technologies</label>
+            <label for="technologies" class="form-label">Tecnologie:</label>
             <select multiple class="form-select" name="technologies[]" id="technologies">
                 <option disabled>Select one</option>
 
@@ -86,7 +86,7 @@
         @enderror
 
         <div class="mb-3">
-            <label for="type_id" class="form-label">Tecnologie:</label>
+            <label for="type_id" class="form-label">Tipo di progetto:</label>
             <select class="form-select @error('type_id') is-invalid  @enderror" name="type_id" id="type_id">
                 <option selected disabled>Seleziona una tecnologia</option>
                 <option value="">Uncategorized</option>

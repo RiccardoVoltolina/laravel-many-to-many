@@ -32,4 +32,7 @@ Route::middleware('auth')->group(function () {
 
 Route::resource('/admin/project', ProjectController::class);
 
+Route::get('recycle', [ProjectController::class, 'recycle'])->name('project.recycle');
+
+
 require __DIR__.'/auth.php';

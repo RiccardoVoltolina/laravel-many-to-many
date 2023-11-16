@@ -172,5 +172,15 @@ class ProjectController extends Controller
 
         $project->delete();
         
-        return redirect()->route('project.index')->with('messaggio', 'hai cancellato il progetto con successo!');    }
+        return redirect()->route('project.index')->with('messaggio', 'hai cancellato il progetto con successo!');    
+    }
+
+    public function recycle()
+    {
+
+        $project_trash = Project::onlyTrashed()->orderByDesc('id')->paginate(10);
+
+
+        return view('admin.projects.recycle', compact('project_trash'));
+    }
 }
