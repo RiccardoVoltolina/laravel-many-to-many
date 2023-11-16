@@ -30,9 +30,22 @@
                             N/A
                         @endif
                     </td>
-                    <td scope="row">{{ $project->title }}</td>
-                    <td>{{ $project->description }}</td>
-                    <td>{{ $project->authors }}</td>
+                    <td class="text-center" scope="row">{{ $project->title }}</td>
+
+                    <td class="text-center">
+                        @if ($project->description)
+                            {{ $project->description }}
+                        @else
+                            N/A
+                        @endif
+                    </td>
+                    <td class="text-center">
+                        @if ($project->authors)
+                            {{ $project->authors }}
+                        @else
+                            N/A
+                        @endif
+                    </td>
                     <td class="text-center"><a href="{{ $project->githublink }}"><i
                                 class="fa-brands fa-github text-black"></i></a></td>
                     <td class="text-center"><a href="{{ $project->projectlink }}"><i
@@ -42,7 +55,7 @@
 
                     <td class="text-center">{{ $project->type ? $project->type->type : 'Nessuna tecnologia selezionata' }}
                     </td>
-                    <td>
+                    <td class="text-center">
                         @forelse ($project->technologies as $technology)
                             <li class="badge bg-secondary">
                                 <i class="fas fa-tag fa-xs fa-fw"></i>

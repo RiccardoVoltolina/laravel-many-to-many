@@ -34,5 +34,7 @@ Route::resource('/admin/project', ProjectController::class);
 
 Route::get('recycle', [ProjectController::class, 'recycle'])->name('project.recycle');
 
+Route::get('projects/restore/{id}', [ProjectController::class, 'restore'])->name('project.restore');
+
 
 require __DIR__.'/auth.php';

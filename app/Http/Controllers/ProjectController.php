@@ -183,4 +183,15 @@ class ProjectController extends Controller
 
         return view('admin.projects.recycle', compact('project_trash'));
     }
+
+    public function restore($id)
+    {
+
+        $project = Project::onlyTrashed()->find($id);
+
+        if ($project) {
+            $project->restore();
+            return redirect()->route('project.recycle')->with('reciclo', 'Progetto recuperato con successo!');
+        }
+    }
 }
