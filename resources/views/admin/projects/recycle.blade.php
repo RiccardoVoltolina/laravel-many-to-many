@@ -2,10 +2,9 @@
 
 @section('content')
 
-@extends('layouts.admin')
 
 @section('content')
-    <h1 class="text-center my-3">PROGETTO</h1>
+    <h1 class="text-center my-3">PROGETTI ELIMINATI:</h1>
 
 
     <div class="table-responsive mt-5">
@@ -76,4 +75,3 @@
 
 
     
-@endsection
